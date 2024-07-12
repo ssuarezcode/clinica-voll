@@ -1,11 +1,11 @@
-package med.voll.api.medico;
+package med.voll.api.domain.medico;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.direccion.Direccion;
+import med.voll.api.domain.direccion.Direccion;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
@@ -55,9 +55,18 @@ public class Medico {
         if(datosActualizarMedico.direccion() != null){
             this.direccion = direccion.actualizarDireccion(datosActualizarMedico.direccion());
         }
+    }
 
+    public void desactivarMedico() {
+        this.activo = false;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -66,14 +75,6 @@ public class Medico {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Object getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
     }
 
     public String getDocumento() {
@@ -92,16 +93,28 @@ public class Medico {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-
-    public void desactivarMedico() {
-        this.activo = false;
+    public Object getEspecialidad() {
+        return especialidad;
     }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
 }
