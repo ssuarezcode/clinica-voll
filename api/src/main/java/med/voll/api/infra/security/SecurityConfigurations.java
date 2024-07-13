@@ -1,8 +1,8 @@
 package med.voll.api.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpMethod;
-import org.springframework.security.core.Authentication;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,11 +25,12 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(csrf->csrf.disable())
-                .sessionManagement((sess-> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)))
-                .authorizeHttpRequests((request -> request.requestMatchers(HttpMethod.POST,"/login")
-                        .permitAll()
-                        .anyRequest().authenticated()))
+        httpSecurity.csrf(csrf -> csrf.disable())
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }

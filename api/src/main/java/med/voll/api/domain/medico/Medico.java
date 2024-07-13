@@ -21,17 +21,14 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean activo;
-
     private String nombre;
     private String email;
     private String telefono;
     private String documento;
 
+    private Boolean activo;
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
-
     @Embedded
     private Direccion direccion;
 
@@ -39,20 +36,20 @@ public class Medico {
         this.activo = true;
         this.nombre = datosRegistroMedico.nombre();
         this.email = datosRegistroMedico.email();
-        this.telefono = datosRegistroMedico.telefono();
         this.documento = datosRegistroMedico.documento();
+        this.telefono = datosRegistroMedico.telefono();
         this.especialidad = datosRegistroMedico.especialidad();
         this.direccion = new Direccion(datosRegistroMedico.direccion());
     }
 
     public void actualizarDatos(DatosActualizarMedico datosActualizarMedico) {
-        if(datosActualizarMedico.nombre() != null){
+        if (datosActualizarMedico.nombre() != null) {
             this.nombre = datosActualizarMedico.nombre();
         }
-        if(datosActualizarMedico.direccion() != null){
+        if (datosActualizarMedico.documento() != null) {
             this.documento = datosActualizarMedico.documento();
         }
-        if(datosActualizarMedico.direccion() != null){
+        if (datosActualizarMedico.direccion() != null) {
             this.direccion = direccion.actualizarDireccion(datosActualizarMedico.direccion());
         }
     }
@@ -60,61 +57,4 @@ public class Medico {
     public void desactivarMedico() {
         this.activo = false;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public Object getEspecialidad() {
-        return especialidad;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
-    }
-
 }

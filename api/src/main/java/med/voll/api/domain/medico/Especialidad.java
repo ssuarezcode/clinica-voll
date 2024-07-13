@@ -5,5 +5,7 @@ public enum Especialidad {
     CARDIOLOGIA,
     GINECOLOGIA,
     PEDIATRIA,
-    NEUROLOGIA
+    NEUROLOGIA,
+    DERMATOLOGIA,
+    PSIQUIATRIA
 }

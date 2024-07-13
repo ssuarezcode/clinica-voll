@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.voll.api.domain.direccion.DatosDireccion;
 import med.voll.api.domain.medico.*;
@@ -17,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired //Object injection with Spring (no recommended for testing purposes).
@@ -68,6 +70,7 @@ public class MedicoController {
                 new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(), medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(), medico.getDireccion().getComplemento()));
         return ResponseEntity.ok(datosMedico);
     }
+
 
     //Hard delete a registry from the DB (not recommended)
 //    public void eliminarMedico(@PathVariable Long id){
